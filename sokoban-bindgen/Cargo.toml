@@ -2,6 +2,12 @@
 name = "sokoban-bindgen"
 version = "0.1.0"
 edition = "2021"
+authors = [
+    "Cavey Cool <caveycool@gmail.com>",
+    "Magnetar Fields <0xMAGNETAR@proton.me>",
+]
+license = "MIT OR Apache-2.0"
+description = "Macro for generating C bindings for sokoban. Use compact, efficient data structures packed into contiguous byte arrays in C, C++, Zig, and anything else that uses a C-compatible interface."
 
 [dependencies]
 concat-idents = "1.1.5"
