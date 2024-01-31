@@ -1,6 +1,5 @@
 pub use sokoban::{FromSlice, NodeAllocatorMap, RedBlackTree};
 
-pub const NONE_SENTINEL: u32 = u32::MAX;
 pub const SUCCESS: u32 = 0;
 pub const FAILURE: u32 = u32::MAX;
 
@@ -25,8 +24,8 @@ macro_rules! red_black_tree_bindings {
                     inner: RedBlackTree<$key, $value, $size>
                 }
 
-                // Ensure we can use NONE_SENTINEL as failure
-                const _: () = assert!($size < NONE_SENTINEL as usize);
+                // Ensure we can use FAILURE as failure
+                const _: () = assert!($size < FAILURE as usize);
 
                 #[no_mangle]
                 pub extern "C" fn initialize(slf: &mut tree_type_name) {
@@ -44,7 +43,7 @@ macro_rules! red_black_tree_bindings {
                 pub unsafe extern "C" fn c_insert(slf: &mut tree_type_name, key: $key, value: $value) -> u32 {
                     match slf.inner.insert(key, value) {
                         Some(addr) => addr,
-                        None => NONE_SENTINEL,
+                        None => FAILURE,
                     }
                 }
 
