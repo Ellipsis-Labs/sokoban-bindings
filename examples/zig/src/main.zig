@@ -6,7 +6,7 @@ pub fn main() !void {
     const allocator = std.heap.page_allocator;
 
     // Mock solana account. This will have u64 alignment
-    var account_bytes = try allocator.alloc(u64, 4128 / @sizeOf(u64));
+    var account_bytes = try allocator.alloc(u64, sokoban.RedBlackTreeu64u64128SIZE / @sizeOf(u64));
     defer allocator.free(account_bytes);
     // Zero-initialize the allocated memory
     for (account_bytes) |*byte| {
@@ -22,7 +22,7 @@ pub fn main() !void {
     std.debug.print("inserted 5 and 3\n", .{});
 
     try unwrapInsert(sokoban.c_insert(tree, 6, 4));
-    std.debug.print("insert 6 and 4\n", .{});
+    std.debug.print("inserted 6 and 4\n", .{});
 
     var key: u64 = 6;
     var value: u64 = 0;
