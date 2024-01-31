@@ -31,3 +31,13 @@ To use the example in C or Zig:
 **To run the Zig Example**: After building the static library and header via step 1 or via `make`, navigate to examples/zig and `zig build run`.
 
 
+# Notes
+1. `Option<T>` is used by sokoban to communicate insertion and retrieval success and failure, but it is not FFI safe. Two values `SUCCESS = 0` and `FAILURE = u32::MAX` were introduced to deal with this[^1]. In lieu of an `Option`, these values communicates to the C or Zig application that an attempt to insert or retrieve a value failed or succeeded. As an example, for the red black tree:
+
+    1. Instead of `insert` returning an `Option<u32>` node address which is `None` when insertion fails, the function returns `FAILURE` if it failed to insert or the node address (also a `u32`) if it succeeded.
+    2. Instead of `get` returning an `Option<&V>`, or `remove` returning an `Option<V>`, the function accepts a pointer to which the value will be copied if successful, along with `SUCCESS = 0`. If the retrieval fails, `FAILURE = u32::MAX` is returned and the pointer remains untouched (and perhaps uninitialized!).
+
+
+
+[^1]: This limits the capacity of the node allocator to one less than its max value.
+
