@@ -54,13 +54,6 @@ macro_rules! red_black_tree_bindings {
                 /// which is potentially uninitialized
                 #[no_mangle]
                 pub unsafe extern "C" fn c_get(slf: &mut tree_type_name, key: &$key, value: *mut $value) -> u32 {
-                    // PERF TODO:
-                    //
-                    // Because remove_addr is not exposed publicly, we have to choose to either
-                    // do two memcpys with remove, or two tree traversals with get/remove.
-                    //
-                    // Here, we choose to do two tree traversals since we don't know much about the
-                    // size of val.
                     match slf.inner.get(key) {
                         Some(val) => {
                             unsafe { *value = *val; }
