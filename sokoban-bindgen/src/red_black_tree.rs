@@ -15,6 +15,7 @@ macro_rules! red_black_tree_bindings {
 
                 const SIZE: usize = core::mem::size_of::<tree_type_name>();
                 ____ci!(tree_type_size_name = RedBlackTree, $key, $value, $size, SIZE {
+                    /// The number of bytes required for this tree
                     #[no_mangle]
                     pub static tree_type_size_name: usize = SIZE;
                 });
@@ -39,6 +40,7 @@ macro_rules! red_black_tree_bindings {
                     RedBlackTree::<$key, $value, $size>::new_from_slice(byte_slice) as *mut _ as *mut tree_type_name
                 }
 
+                /// Returns the u32 node address if successful, or u32::MAX if the operation failed.
                 #[no_mangle]
                 pub unsafe extern "C" fn c_insert(slf: &mut tree_type_name, key: $key, value: $value) -> u32 {
                     match slf.inner.insert(key, value) {
@@ -47,7 +49,7 @@ macro_rules! red_black_tree_bindings {
                     }
                 }
 
-                /// Returns 0 if successful, u32::MAX if failure.
+                /// Returns 0 if successful, or u32::MAX if the operation failed.
                 ///
                 /// If this fails, the given pointer will point to whatever was there before,
                 /// which is potentially uninitialized
@@ -62,7 +64,7 @@ macro_rules! red_black_tree_bindings {
                     }
                 }
 
-                /// Returns 0 if successful, u32::MAX if failure.
+                /// Returns 0 if successful, or u32::MAX if the operation failed.
                 ///
                 /// If this fails, the given pointer will point to whatever was there before,
                 /// which is potentially uninitialized
