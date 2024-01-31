@@ -5,6 +5,8 @@
 
 typedef struct RedBlackTreeu64u64128 RedBlackTreeu64u64128;
 
+extern const uintptr_t RedBlackTreeu64u64128SIZE;
+
 void initialize(struct RedBlackTreeu64u64128 *slf);
 
 struct RedBlackTreeu64u64128 *initialize_in(uint8_t *bytes, uintptr_t len);

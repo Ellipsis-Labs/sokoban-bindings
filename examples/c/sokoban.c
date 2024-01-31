@@ -25,7 +25,8 @@
 int main()
 {
     // Mock solana account. This will have u64 alignment
-    u_int64_t *account_bytes = malloc(4128);
+    u_int64_t *account_bytes = malloc(RedBlackTreeu64u64128SIZE);
+    printf("allocated %lu\n bytes", RedBlackTreeu64u64128SIZE);
 
     RedBlackTreeu64u64128 *tree = (RedBlackTreeu64u64128 *)(account_bytes);
     initialize(tree);
@@ -35,7 +36,7 @@ int main()
     printf("inserted 5 and 3\n");
 
     UNWRAP_INSERT(c_insert(tree, (uint64_t)(6), (uint64_t)(4)));
-    printf("insert 6 and 4\n");
+    printf("inserted 6 and 4\n");
 
     uint64_t key = 6;
     uint64_t value = 0;
