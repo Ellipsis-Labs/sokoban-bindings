@@ -14,11 +14,11 @@ macro_rules! red_black_tree_bindings {
             pub mod tree_type_name {
                 use super::*;
 
-                // TODO: this needs to be fixed
-                // const SIZE: usize = core::mem::size_of::<tree_type_name>();
-                // ____ci!(tree_type_size_name = RedBlackTree, $key, $value, $size, SIZE {
-                //     pub const tree_type_size_name: usize = SIZE;
-                // });
+                const SIZE: usize = core::mem::size_of::<tree_type_name>();
+                ____ci!(tree_type_size_name = RedBlackTree, $key, $value, $size, SIZE {
+                    #[no_mangle]
+                    pub static tree_type_size_name: usize = SIZE;
+                });
 
                 #[allow(non_upper_case)]
                 pub struct tree_type_name {
